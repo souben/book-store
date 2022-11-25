@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class Receiver {
 
-    @KafkaListener(topics="test")
+    @KafkaListener(topics="customerchange")
 	public void receive(@Payload CustomerDTO customerDTO, @Headers MessageHeaders headers){
 		System.out.println("here");
 		System.out.println("I received one message : " + customerDTO);

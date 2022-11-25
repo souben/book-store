@@ -1,4 +1,4 @@
-package customers;
+package customers.web;
 
 import customers.domain.Customer;
 import customers.dto.CustomerDTO;
