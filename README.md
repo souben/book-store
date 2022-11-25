@@ -23,3 +23,26 @@ To support the core functionalities of the system we have added :
 
  - Config server: to separate configuration for code.
 
+
+<------------------# HOW TO RUN THIS PROJECT : #---------------->
+
+1. run the docker compose file : 
+    docker-compose up -d
+
+2. you will to create the database and you will need to create the user on the required database using the required roles and authentication.
+
+    - Execute the docker-compose.yaml file:
+        docker-compose exec mongo bash
+    
+    - login using the shell:
+        mongosh -u root -p example --authenticationDatabase admin
+
+    - once you logged in , create the database :
+        use swa-project
+
+    - create the required user with required roles for the database:
+        db.createUser({
+            user: "root"
+            pwd: "example",
+            roles: ["readWrite"]
+        })
