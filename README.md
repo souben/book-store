@@ -15,13 +15,13 @@ customernumber, customerName, isbn and book title.
 
 We're using a MongoDB databases for each service to achieve tight coupling between microservices .
 
-To support the core functionalities of the system we have added :
+To support the core functionalities of the system we added the following services :
  - a service registry : to make easy for service discovery, we did replicated the regitry to avoid single point of failure.
  - an API Gateway: to handle cross cutting concerns and to make easy for clients becuase they need to know only about API Gateway.
 
  - Zipkin : to monitor/ follow business processes.
 
- - Config server: to separate configuration for code.
+ - Config server: to separate configuration from code.
 
 
 <------------------# HOW TO RUN THIS PROJECT : #---------------->
