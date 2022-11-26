@@ -24,7 +24,7 @@ To support the core functionalities of the system we added the following service
  - Config server: to separate configuration from code.
 
 
-<------------------# HOW TO RUN THIS PROJECT : #---------------->
+------------------#    HOW TO RUN THIS PROJECT   #----------------
 
 1. run the docker compose file : 
     docker-compose up -d
