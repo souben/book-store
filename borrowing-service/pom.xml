@@ -8,11 +8,11 @@
 		<version>2.7.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>CustomerService</groupId>
-	<artifactId>customer-service</artifactId>
+	<groupId>BorrowingService</groupId>
+	<artifactId>borrowing-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>customer-service</name>
-	<description>customer service for spring boot</description>
+	<name>borrowing-service</name>
+	<description>borrowing service for spring boot</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring-cloud.version>2021.0.5</spring-cloud.version>

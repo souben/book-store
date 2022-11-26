@@ -12,8 +12,9 @@ public class Sender {
     @Autowired
     private KafkaTemplate<String, CustomerDTO> kafkaTemplate;
 
-    public void send(String topic, CustomerDTO customerDTO) {
+    public void send(String topic, String key, CustomerDTO customerDTO) {
 
-        kafkaTemplate.send(topic, customerDTO);
+        kafkaTemplate.send(topic, key, customerDTO);
     }
+
 }

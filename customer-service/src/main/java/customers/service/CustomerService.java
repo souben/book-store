@@ -4,6 +4,7 @@ package customers.service;
 import customers.domain.Customer;
 import customers.dto.CustomerDTO;
 import customers.dto.CustomerDTOAdapter;
+import customers.integration.Sender;
 import customers.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,9 @@ public class CustomerService {
     @Autowired
     CustomerDTOAdapter customerDTOAdapter;
 
+    @Autowired
+    Sender sender;
+
     //  GET Consumer
     public Optional<Customer> getCustomer(String customerNumber) {
         return customerRepository.findById(customerNumber);
@@ -28,7 +32,10 @@ public class CustomerService {
     // ADD consumer
     public Customer addCustomer(CustomerDTO customerDTO){
         Customer customer = customerDTOAdapter.getCustomerFromCustomerDTO(customerDTO);
-        return (Customer) customerRepository.save(customer);
+        Customer record  = (Customer) customerRepository.save(customer);
+        System.out.println("customerDTO has been saved successfully . . . ");
+        sender.send("customerchange", "customerCreation", customerDTO);
+        return record;
     }
 
     // POST consumer
@@ -38,12 +45,18 @@ public class CustomerService {
         if(record.isPresent()){
             Customer customer = customerDTOAdapter.getCustomerFromCustomerDTO(customerDTO);
             newRecord = Optional.of((Customer) customerRepository.save(customer));
+            sender.send("customerchange", "customerUpdate", customerDTO);
         }
         return newRecord;
     }
 
     // DELETE consumer
-    public void deleteCustomer(String customerNumber){
+    public void deleteCustomer(String customerNumber) {
+        Optional<Customer> record = customerRepository.findById(customerNumber);
         customerRepository.deleteById(customerNumber);
+        if (record.isPresent()) {
+            CustomerDTO customerDTO = customerDTOAdapter.getCustomerDTOFromCustomer(record.get());
+            sender.send("customerchange", "customerDeletion", customerDTO);
+        }
     }
 }

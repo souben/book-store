@@ -19,8 +19,7 @@ import java.util.Optional;
 
 @SpringBootApplication
 @EnableKafka
-@EnableAutoConfiguration
-public class CustomerServiceApplication implements CommandLineRunner {
+public class CustomerServiceApplication {
 
 	@Autowired
 	Sender sender;
@@ -28,17 +27,6 @@ public class CustomerServiceApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(CustomerServiceApplication.class, args);
 	}
-
-
-
-	@Override
-	public void run(String... args) throws Exception {
-		CustomerDTO customerDTO = new CustomerDTO("1", "Ali", "North", "Fairfield", "52275", "a@gmail.com", "415266354547");
-        System.out.println("Sending message ...");
-		sender.send("customerchange", customerDTO);
-		System.out.println("data sent");
-	}
-
 
 }
 

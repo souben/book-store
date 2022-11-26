@@ -1,0 +1,48 @@
+server:
+  port: 8972
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eurekaserver2:8762/eureka,
+                   http://eurekaserver1:8761/eureka
+
+
+
+spring:
+  application:
+    name: BorrowingService
+  kafka:
+    consumer:
+      group-id: "borrowing"
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: borrowing.integration.CustomerDTODeserializer
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: borrowing.integration.CustomerDTOSerializer
+
+    bootstrap-servers:  "localhost:9092"
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: root
+      password: example
+      database: borrowing
+
+  zipkin:
+    base-url: http://localhost:9411
+
+sleuth:
+  sampler:
+    probability: 1 #100% (default = 10%)
+
+logging:
+  level:
+    root: error
+
+org:
+  springframework: error
+
